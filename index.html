@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Free YouTube Downloader</title>
+  <title>YT Downloader</title>
 </head>
 <body style="background:#111; color:white; text-align:center; padding:40px; font-family:sans-serif;">
   <h1>YT Downloader</h1>
-  <input id="ytUrl" type="text" placeholder="Enter YouTube link" style="width:90%; padding:10px;"><br>
+
+  <input id="ytUrl" type="text" placeholder="Paste YouTube link" style="width:90%; padding:10px;"><br>
+
   <select id="quality" style="padding:10px; width:90%;">
     <option value="18">360p</option>
     <option value="22">720p</option>
     <option value="137">1080p</option>
   </select><br>
+
   <button onclick="download()" style="padding:10px 20px;">Download</button>
   <p id="msg"></p>
 
@@ -18,7 +21,16 @@
     function download() {
       const url = document.getElementById("ytUrl").value.trim();
       const quality = document.getElementById("quality").value;
-      const api = `/api/download?url=${encodeURIComponent(url)}&quality=${quality}`;
+
+      // ⬇️ Replace with your own Replit backend URL if you remix it
+      const replitAPI = "https://yt-downloader-free.codebypulse.repl.co";
+
+      if (!url) {
+        document.getElementById("msg").innerText = "Please enter a YouTube link.";
+        return;
+      }
+
+      const api = `${replitAPI}/download?url=${encodeURIComponent(url)}&quality=${quality}`;
       document.getElementById("msg").innerHTML = `Starting download... <a href="${api}" target="_blank">Click here if not automatic</a>`;
       window.open(api, "_blank");
     }
