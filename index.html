@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Free YouTube Downloader</title>
+</head>
+<body style="background:#111; color:white; text-align:center; padding:40px; font-family:sans-serif;">
+  <h1>YT Downloader</h1>
+  <input id="ytUrl" type="text" placeholder="Enter YouTube link" style="width:90%; padding:10px;"><br>
+  <select id="quality" style="padding:10px; width:90%;">
+    <option value="18">360p</option>
+    <option value="22">720p</option>
+    <option value="137">1080p</option>
+  </select><br>
+  <button onclick="download()" style="padding:10px 20px;">Download</button>
+  <p id="msg"></p>
+
+  <script>
+    function download() {
+      const url = document.getElementById("ytUrl").value.trim();
+      const quality = document.getElementById("quality").value;
+      const api = `/api/download?url=${encodeURIComponent(url)}&quality=${quality}`;
+      document.getElementById("msg").innerHTML = `Starting download... <a href="${api}" target="_blank">Click here if not automatic</a>`;
+      window.open(api, "_blank");
+    }
+  </script>
+</body>
+</html>
